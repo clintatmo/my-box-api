@@ -11,11 +11,11 @@ public class UserService {
 
     public List<User> getAllUsers() {
 
-        List<User> users = User.where("name = 'John'");
+        List<User> users = User.findAll();
         return users;
     }
 
-    public User getUser(String id) {
+    public User getUser(int id) {
         List<User> users = User.where("id = ?", id);
         return users.get(0);
     }
@@ -23,9 +23,8 @@ public class UserService {
     public User createUser(String name, String email) {
 
         User p = new User();
-        p.set("name", "Marilyn");
-        p.set("last_name", "Monroe");
-        p.set("dob", "1935-12-06");
+        p.set("username", "Marilyn");
+        p.set("password", "Monroe");
         p.saveIt();
 
         return null;
@@ -33,8 +32,8 @@ public class UserService {
 
     public User updateUser(String params, String name, String email) {
 
-        User e = User.findFirst("name = ?", name);
-        e.set("last_name", "Steinbeck").saveIt();
+        User e = User.findFirst("username = ?", name);
+        e.set("password", "Steinbeck").saveIt();
 
         return null;
     }

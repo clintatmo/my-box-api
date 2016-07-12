@@ -1,7 +1,4 @@
 import com.google.gson.Gson;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import spark.Spark;
 import spark.utils.IOUtils;
 import sr.catmosoerodjo.Application;
@@ -18,16 +15,16 @@ import static org.junit.Assert.assertNotNull;
 
 public class UserControllerIntegrationTest {
 
-    @BeforeClass
+    //@BeforeClass
     public static void beforeClass() {
         Application.main(null);
     }
-    @AfterClass
+    //@AfterClass
     public static void afterClass() {
     Spark.stop();
     }
 
-    @Test
+    //@Test
     public void aNewUserShouldBeCreated() {
         TestResponse res = request("POST", "/users?name=john&email=john@foobar.com");
         Map<String, String> json = res.json();

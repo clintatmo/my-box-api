@@ -20,7 +20,7 @@ public class UserController {
 
         get("/users/:id", (req, res) -> {
             String id = req.params(":id");
-            User user = userService.getUser(id);
+            User user = userService.getUser(Integer.valueOf(id));
             if (user != null) {
                 return user;
             }
@@ -29,14 +29,14 @@ public class UserController {
         }, json());
 
         post("/users", (req, res) -> userService.createUser(
-                req.queryParams("name"),
-                req.queryParams("email")
+                req.queryParams("username"),
+                req.queryParams("password")
         ), json());
 
         put("/users/:id", (req, res) -> userService.updateUser(
                 req.params(":id"),
-                req.queryParams("name"),
-                req.queryParams("email")
+                req.queryParams("username"),
+                req.queryParams("password")
         ), json());
 
     }
