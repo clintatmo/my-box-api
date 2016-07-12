@@ -1,5 +1,7 @@
 package sr.catmosoerodjo.services;
 
+import org.javalite.activejdbc.Base;
+import org.javalite.activejdbc.DB;
 import sr.catmosoerodjo.models.User;
 
 import java.util.List;
@@ -11,12 +13,23 @@ public class UserService {
 
     public List<User> getAllUsers() {
 
+        new DB("my-box-db").open("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/my-box-db", "root", "root");
+
         List<User> users = User.findAll();
+
+        new DB("my-box-db").close();
+
         return users;
     }
 
     public User getUser(int id) {
+
+        new DB("my-box-db").open("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/my-box-db", "root", "root");
+
         List<User> users = User.where("id = ?", id);
+
+        new DB("my-box-db").close();
+
         return users.get(0);
     }
 

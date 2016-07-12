@@ -1,6 +1,7 @@
 package sr.catmosoerodjo.models;
 
 import org.javalite.activejdbc.Model;
+import org.javalite.activejdbc.annotations.DbName;
 import org.javalite.activejdbc.annotations.Table;
 
 /**
@@ -8,4 +9,5 @@ import org.javalite.activejdbc.annotations.Table;
  */
 
 @Table("user")
+@DbName("my-box-db")
 public class User extends Model {}

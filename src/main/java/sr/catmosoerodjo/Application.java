@@ -14,12 +14,12 @@ public class Application {
     public static void main(String[] args) {
 
         //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/my-box-db", "loanmanagement", "loanmanagement");
-        new DB("my-box-db").open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/my-box-db", "loanmanagement", "loanmanagement");
+        //new DB("my-box-db").open("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/my-box-db", "root", "");
 
         new WelcomeController();
         new UserController(new UserService());
 
-        Base.close();
+        //Base.close();
 
     }
 }
