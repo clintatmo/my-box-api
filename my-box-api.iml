@@ -118,8 +118,6 @@
     <orderEntry type="library" name="Maven: com.stormpath.sdk:stormpath-sdk-api:0.9.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.stormpath.sdk:stormpath-sdk-httpclient:0.9.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.stormpath.sdk:stormpath-sdk-impl:0.9.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.11" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.11" level="project" />
     <orderEntry type="library" name="Maven: org.javalite:activejdbc:1.4.11" level="project" />
     <orderEntry type="library" name="Maven: org.javalite:javalite-common:1.4.11" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.8.2" level="project" />
