@@ -1,13 +1,10 @@
 package sr.catmosoerodjo.controllers;
 
-import sr.catmosoerodjo.models.User;
+import com.google.gson.Gson;
 import sr.catmosoerodjo.services.UserService;
 import sr.catmosoerodjo.utils.ResponseError;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
-import static spark.Spark.put;
-import static sr.catmosoerodjo.utils.JsonUtil.json;
+import static spark.Spark.*;
 
 /**
  * Created by catmosoerodjo on 7/10/16.
@@ -16,30 +13,50 @@ public class UserController {
 
     public UserController(final UserService userService) {
 
-        get("/users", (req, res) -> userService.getAllUsers(), json());
+        get("/users", (req, res) -> userService.getAllUsers());
 
         get("/users/:id", (req, res) -> {
             String id = req.params(":id");
-            User user = userService.getUser(id);
+            String user = userService.getUser(Integer.valueOf(id));
             if (user != null) {
                 return user;
             }
             res.status(400);
-            return new ResponseError("No user with id '%s' found", id);
-        }, json());
+            return new Gson().toJson(new ResponseError("No user with id '%s' found", id));
+        });
 
-        post("/users", (req, res) -> userService.createUser(
-                req.queryParams("name"),
-                req.queryParams("email")
-        ), json());
+        post("/users", (req, res) -> {
 
-        put("/users/:id", (req, res) -> userService.updateUser(
-                req.params(":id"),
-                req.queryParams("name"),
-                req.queryParams("email")
-        ), json());
+            Boolean valid = userService.createUser(
+                req.queryParams("username"),
+                req.queryParams("password"));
+
+            if (valid) {
+                res.status(200);
+                return null;
+            }
+            res.status(400);
+            return new Gson().toJson(new ResponseError("User not created"));
+
+        });
+
+        put("/users/:id", (req, res) -> {
+            Boolean valid = userService.updateUser(
+                    req.params(":id"),
+                    req.queryParams("username"),
+                    req.queryParams("password"));
+
+            if (valid) {
+                res.status(200);
+                return null;
+            }
+            res.status(400);
+            return new Gson().toJson(new ResponseError("User not updated"));
+
+            }
+        );
+
+        }
+
 
     }
-
-
-}
