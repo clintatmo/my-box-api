@@ -2,8 +2,10 @@ package sr.catmosoerodjo.controllers;
 
 import com.google.gson.Gson;
 import org.pac4j.core.config.Config;
+import org.pac4j.core.credentials.Credentials;
 import org.pac4j.core.profile.ProfileManager;
 import org.pac4j.core.profile.UserProfile;
+import org.pac4j.http.profile.creator.ProfileCreator;
 import org.pac4j.jwt.profile.JwtGenerator;
 import org.pac4j.sparkjava.SparkWebContext;
 import spark.Request;
@@ -44,6 +46,7 @@ public class AuthenticationController {
 
         final SparkWebContext context = new SparkWebContext(request, response);
         final ProfileManager manager = new ProfileManager(context);
+
         return manager.get(true);
     }
 

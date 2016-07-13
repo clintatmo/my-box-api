@@ -50,20 +50,19 @@ public class UserController {
         });
 
         put("/users/:id", (req, res) -> {
-                    Boolean valid = userService.updateUser(
-                            req.params(":id"),
-                            req.queryParams("username"),
-                            req.queryParams("password"));
+            Boolean valid = userService.updateUser(
+                    req.params(":id"),
+                    req.queryParams("username"),
+                    req.queryParams("password"));
 
-                    if (valid) {
-                        res.status(200);
-                        return null;
-                    }
-                    res.status(400);
-                    return new Gson().toJson(new ResponseError("User not updated"));
+            if (valid) {
+                res.status(200);
+                return null;
+            }
+            res.status(400);
+            return new Gson().toJson(new ResponseError("User not updated"));
 
-                }
-        );
+        });
 
     }
 
