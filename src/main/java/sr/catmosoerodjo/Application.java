@@ -1,7 +1,5 @@
 package sr.catmosoerodjo;
 
-import org.javalite.activejdbc.Base;
-import org.javalite.activejdbc.DB;
 import sr.catmosoerodjo.controllers.UserController;
 import sr.catmosoerodjo.controllers.WelcomeController;
 import sr.catmosoerodjo.services.UserService;
@@ -13,8 +11,7 @@ public class Application {
 
     public static void main(String[] args) {
 
-        //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/my-box-db", "loanmanagement", "loanmanagement");
-        //new DB("my-box-db").open("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/my-box-db", "root", "");
+        //Base.open("com.mysql0.jdbc.Driver", "jdbc:mysql://localhost:3306/my-box-db", "root", "root");
 
         new WelcomeController();
         new UserController(new UserService());

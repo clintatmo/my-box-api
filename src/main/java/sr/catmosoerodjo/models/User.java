@@ -10,4 +10,5 @@ import org.javalite.activejdbc.annotations.Table;
 
 @Table("user")
 @DbName("my-box-db")
-public class User extends Model {}
+public class User extends Model {
+}

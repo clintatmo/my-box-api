@@ -1,53 +1,63 @@
 package sr.catmosoerodjo.services;
 
-import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.DB;
+import org.javalite.activejdbc.LazyList;
 import sr.catmosoerodjo.models.User;
-
-import java.util.List;
 
 /**
  * Created by catmosoerodjo on 7/10/16.
  */
 public class UserService {
 
-    public List<User> getAllUsers() {
+    public String getAllUsers() {
 
         new DB("my-box-db").open("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/my-box-db", "root", "root");
-
-        List<User> users = User.findAll();
-
+        LazyList<User> users = User.findAll();
+        String json = null;
+        if(users != null){
+            json = users.toJson(true);
+        }
         new DB("my-box-db").close();
 
-        return users;
+        return json;
+
     }
 
-    public User getUser(int id) {
+    public String getUser(Integer id) {
 
         new DB("my-box-db").open("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/my-box-db", "root", "root");
-
-        List<User> users = User.where("id = ?", id);
-
+        User user = User.findById(id);
+        String json = null;
+        if(user != null){
+            json = user.toJson(true);
+        }
         new DB("my-box-db").close();
 
-        return users.get(0);
+        return json;
     }
 
-    public User createUser(String name, String email) {
+    public boolean createUser(String username, String password) {
 
+        new DB("my-box-db").open("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/my-box-db", "root", "root");
         User p = new User();
-        p.set("username", "Marilyn");
-        p.set("password", "Monroe");
-        p.saveIt();
+        p.set("username", username);
+        p.set("password", password);
+        boolean createdUser = p.saveIt();
+        new DB("my-box-db").close();
 
-        return null;
+        return createdUser;
     }
 
-    public User updateUser(String params, String name, String email) {
+    public boolean updateUser(String id, String username, String password) {
 
-        User e = User.findFirst("username = ?", name);
-        e.set("password", "Steinbeck").saveIt();
+        new DB("my-box-db").open("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1:3306/my-box-db", "root", "root");
+        User e = User.findById(id);
+        e.set("username", username);
+        e.set("password", password);
+        boolean updatedUser = e.saveIt();
+        new DB("my-box-db").close();
 
-        return null;
+
+        return updatedUser;
     }
 }
